@@ -1,11 +1,40 @@
-.moviesContainer
+.moviesComp
     display: flex;
-    flex-direction: row;
-    margin: 100px 20px 20px 20px;
-    width: 100%;
-    flex-wrap: wrap;
+    margin: 120px 20px 20px 20px;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+
+    .nav-arrows
+        display: flex;
+        position: fixed;
+        top: 75px;
+        background-color: #FBF7ED;
+        width: 100%;
+        justify-content: center;
+        button
+            background-color: transparent;
+            border: 0;
+            font-size: 2.5rem;
+            color: #818A91
+        button:hover
+            color: #42474C
+
+        .left
+            transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+        h3
+            margin-top: 11px;
+            font-size: 1.5rem;
+            color: #42474C
+
     .messageEmpty
         color: #007F60
     .messageInvalid
         color: red
+    .moviesContainer
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;

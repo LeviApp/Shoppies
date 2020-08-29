@@ -12,10 +12,12 @@ class App extends Component {
 
     this.state = {
       search: '',
-      error: false,
       movies: [
        
-      ]
+      ],
+      error: false,
+      page: 1,
+      totalPages: 0
   }
   }
 
@@ -39,10 +41,10 @@ class App extends Component {
   }
 
 searchMovies = () => {
-    axios.get(`http://www.omdbapi.com/?s=${this.state.search}&type=movie&apikey=e7fa079b`)
+    axios.get(`http://www.omdbapi.com/?s=${this.state.search}&type=movie&page=1&apikey=e7fa079b`)
     .then(response => {
       if (response.data['Response'] === 'True') {
-        this.setState({movies: response.data['Search'], error: false});
+        this.setState({movies: response.data['Search'], page: 1, totalPages: Math.ceil(Number(response.data['totalResults'])/10), error: false, });
       }
 
       else {
@@ -57,7 +59,7 @@ searchMovies = () => {
     return (
       <div className='Main'>
         <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} />
-        <Movies movies={this.state.movies} error={this.state.error} />
+        <Movies movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} />
       </div>
     );
   }
