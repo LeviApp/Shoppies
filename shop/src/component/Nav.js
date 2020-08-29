@@ -1,6 +1,8 @@
 
 import React, { Component }  from 'react';
 import logo from '../img/ShoppiesLogo.png';
+import logo2 from '../img/ShopifyLogo.png';
+
 import '../SASS/Nav.sass';
 
 
@@ -9,6 +11,7 @@ function Nav() {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <input placeholder="◎ Search for Movie Title"></input>
+
         </header>
     );
   }
