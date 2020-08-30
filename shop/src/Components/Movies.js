@@ -32,9 +32,9 @@ class Movies extends Component {
             else {
                 message = '';
                 navarrows = <div className='nav-arrows'>
-                                <button class="arrow left">›</button>
+                                <button className="arrow left" onClick={() => this.props.moviesMove(this.props.page-1)}>›</button>
                                 <h3>{this.props.page} of {this.props.totalPages}</h3>
-                                <button class="arrow right">›</button>
+                                <button className="arrow right" onClick={() => this.props.moviesMove(this.props.page+1)}>›</button>
                             </div>;
             }
 
@@ -44,7 +44,7 @@ class Movies extends Component {
                 {message}
                 <div className='moviesContainer'>
               {this.props.movies.map(movie => {
-                  return <Movie movie={movie} />
+                  return <Movie movie={movie} key={movie.imdbID + movie.Title} />
               })}
                 </div>
             </div>

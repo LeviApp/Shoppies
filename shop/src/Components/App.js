@@ -55,11 +55,33 @@ searchMovies = () => {
     .catch(err => this.setState({movies: []}))
 }
 
+moviesMove = (val) => {
+  let correctVal = val;
+  if (correctVal === this.state.totalPages+1) {
+    correctVal = 1
+  }
+  else if (correctVal === 0) {
+    correctVal = this.state.totalPages
+  }
+  axios.get(`http://www.omdbapi.com/?s=${this.state.search}&type=movie&page=${correctVal}&apikey=e7fa079b`)
+  .then(response => {
+    if (response.data['Response'] === 'True') {
+      this.setState({movies: response.data['Search'], page: correctVal, totalPages: Math.ceil(Number(response.data['totalResults'])/10), error: false, });
+    }
+
+    else {
+      this.setState({movies: [], error: true})
+    }
+}
+ )
+  .catch(err => this.setState({movies: []}))
+}
+
   render() {
     return (
       <div className='Main'>
         <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} />
-        <Movies movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} />
+        <Movies movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} />
       </div>
     );
   }
