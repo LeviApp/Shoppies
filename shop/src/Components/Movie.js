@@ -25,7 +25,7 @@ class Movie extends Component {
                 <div>
                     <h1>{this.props.movie['Title']}</h1>
                     <h2>{this.props.movie['Year']}</h2>
-                    <button>Nominate</button>
+                    <button onClick={() => this.props.nominatedMovie(this.props.movie)}>Nominate</button>
                 </div>
             </div>
         )

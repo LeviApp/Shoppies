@@ -18,32 +18,11 @@ class App extends Component {
       page: 1,
       totalPages: 0,
       nominated: [{
-        "Title": "Star Wars: Episode IV - A New Hope",
+        "Title": "Nominated Movies",
         "Year": "1977",
-        "imdbID": "tt0076759",
+        "imdbID": "empty",
         "Type": "movie",
-        "Poster": "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
-      },
-      {
-        "Title": "Star Wars: Episode V - The Empire Strikes Back",
-        "Year": "1980",
-        "imdbID": "tt0080684",
-        "Type": "movie",
-        "Poster": "https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
-      },
-      {
-        "Title": "Star Wars: Episode VI - Return of the Jedi",
-        "Year": "1983",
-        "imdbID": "tt0086190",
-        "Type": "movie",
-        "Poster": "https://m.media-amazon.com/images/M/MV5BOWZlMjFiYzgtMTUzNC00Y2IzLTk1NTMtZmNhMTczNTk0ODk1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg"
-      },
-      {
-        "Title": "Star Wars: Episode VII - The Force Awakens",
-        "Year": "2015",
-        "imdbID": "tt2488496",
-        "Type": "movie",
-        "Poster": "https://m.media-amazon.com/images/M/MV5BOTAzODEzNDAzMl5BMl5BanBnXkFtZTgwMDU1MTgzNzE@._V1_SX300.jpg"
+        "Poster": "https://upload.wikimedia.org/wikipedia/en/c/cd/Canadian_Screen_Award_trophy.png"
       }],
       open: false,
   }
@@ -131,11 +110,21 @@ nominatedShow = () => {
   console.log(nom, nomarr)
 }
 
+nominatedMovie = (movie) => {
+  console.log(this.state.nominated, 'this is the nominated movie before')
+
+  if (this.state.nominated[0].imdbID === "empty") {
+    this.setState({nominated: [movie]});
+  }
+  this.state.nominated.push(movie)
+  console.log(this.state.nominated, 'this is the nominated movie after')
+}
+
   render() {
     return (
       <div className='Main'>
         <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} />
-        <Movies movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} />
+        <Movies movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} />
         <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} />
       </div>
     );
