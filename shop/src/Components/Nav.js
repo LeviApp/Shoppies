@@ -24,8 +24,8 @@ class Nav extends Component {
           return (
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
-              <input placeholder="◎ Search for Movie Title" onChange={this.props.inputHandler}></input>
-              <button onClick={this.props.searchMovies}>Search</button>
+              <input className='loggedin' placeholder="◎ Search for Movie Title" onChange={this.props.inputHandler}></input>
+              <button className='loggedin' onClick={this.props.searchMovies}>Search</button>
             </header>
         );
         }

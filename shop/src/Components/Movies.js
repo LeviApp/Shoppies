@@ -22,7 +22,7 @@ class Movies extends Component {
         let message;
         let navarrows;
             if (this.props.movies.length === 0 && this.props.error === false) {
-                message = <h1 className='messageEmpty'>Search for a movie to nominate!</h1>;
+                message = <h1 className='loggedin messageEmpty'>Search for a movie to nominate!</h1>;
                 navarrows = '';
             }
             else if (this.props.error === true) {

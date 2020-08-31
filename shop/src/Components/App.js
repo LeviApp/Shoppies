@@ -44,14 +44,8 @@ class App extends Component {
         "imdbID": "tt2488496",
         "Type": "movie",
         "Poster": "https://m.media-amazon.com/images/M/MV5BOTAzODEzNDAzMl5BMl5BanBnXkFtZTgwMDU1MTgzNzE@._V1_SX300.jpg"
-      },
-      {
-        "Title": "Star Wars: Episode I - The Phantom Menace",
-        "Year": "1999",
-        "imdbID": "tt0120915",
-        "Type": "movie",
-        "Poster": "https://m.media-amazon.com/images/M/MV5BYTRhNjcwNWQtMGJmMi00NmQyLWE2YzItODVmMTdjNWI0ZDA2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg"
-      }]
+      }],
+      open: false,
   }
   }
 
@@ -72,6 +66,14 @@ class App extends Component {
 
     let value=event.target.value;
     this.setState({"search": value})
+  }
+
+  loggedIn = () => {
+    let logIn = document.getElementsByClassName('loggedin')
+
+    for (let val of logIn) {
+      val.style.visibility = 'visible'
+    }
   }
 
 searchMovies = () => {
@@ -111,12 +113,30 @@ moviesMove = (val) => {
   .catch(err => this.setState({movies: []}))
 }
 
+nominatedShow = () => {
+  let nom = document.getElementsByClassName('nominated')[0]
+  let nomarr = document.getElementsByClassName('nominatedarrow')[0]
+
+  if (this.state.open === false) {
+    this.setState({open: true});
+    nom.style.display = 'flex';
+    nomarr.style.transform = 'rotate(90deg)';
+  }
+
+  else {
+    this.setState({open: false});
+    nom.style.display = 'none';
+    nomarr.style.transform = 'rotate(-90deg)';
+  }
+  console.log(nom, nomarr)
+}
+
   render() {
     return (
       <div className='Main'>
         <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} />
         <Movies movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} />
-        <Nominated nominated={this.state.nominated} />
+        <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} />
       </div>
     );
   }
