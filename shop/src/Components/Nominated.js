@@ -21,10 +21,19 @@ class Nominated extends Component {
         render() {
           return (
             <footer className="nominatedContainer">
-            <h1>★ Nominated ★</h1>
-            <div>
+            <section>
+                <div className='loggedin nombutton'>
+                    <h1>★ Nominated ★</h1>
+                    <button className='nominatedarrow' onClick={() => this.props.nominatedShow()}>›</button>
+                </div>
+
+                <div className='login'>
+                    <h1 onClick={this.props.loggedIn}>Login</h1>
+                </div>
+            </section>
+            <div className='nominated'>
             {this.props.nominated.map(award => {
-                 return <NomSingle award={award} />
+                 return <NomSingle key={award.imdbID + award.Title} award={award} />
              })}
             </div>
             </footer>

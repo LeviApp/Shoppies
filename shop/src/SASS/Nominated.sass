@@ -6,10 +6,32 @@ footer
     background-color: #002E25
     width: 100%
     justify-content: center;
-    align-items: center;
-    h1
-        font-size: 1.25rem;
-        color: white;
-        padding-top: 10px;
-    div
+    align-items: center;    
+    section
         display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        .nombutton
+            display: flex;
+            visibility: hidden;
+
+            h1
+                font-size: 1.25rem;
+                color: gold;
+                padding-top: 10px;
+            button
+                background-color: transparent
+                color: white;
+                border: 0;
+                transform: rotate(-90deg);
+                font-size: 2rem;
+                margin: 5px 0 0 15px;
+        .login
+            h1
+                font-size: 1.25rem;
+                color: white;
+        
+    .nominated
+        display: none;
