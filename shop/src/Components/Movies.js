@@ -43,8 +43,8 @@ class Movies extends Component {
                 {navarrows}
                 {message}
                 <div className='moviesContainer'>
-              {this.props.movies.map((movie, index) => {
-                  return <Movie movie={movie} nominated={this.props.nominated} key={movie.imdbID + movie.Year} ID={movie.imdbID + movie.Year} nominatedMovie={this.props.nominatedMovie} />
+              {this.props.movies.map((movie) => {
+                  return <Movie movie={movie} nominated={this.props.nominated} key={movie.imdbID + movie.Year} ID={movie.imdbID + movie.Year} nominatedMovie={this.props.nominatedMovie} deleteNom={this.props.deleteNom} />
               })}
                 </div>
             </div>

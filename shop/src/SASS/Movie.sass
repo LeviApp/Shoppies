@@ -7,13 +7,15 @@
     margin: 20px;
     img
         width: 100%;
+    h1
+        color:
     div
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         h1
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             margin: 20px 0 5px 0;
             text-align: center;
             width: 90%;
@@ -31,10 +33,20 @@
             transition-duration: 200ms
         button:hover
             background-color: #002E25
+            cursor: pointer;
         .nomMovie
             background-color: gold;
             color: black;
-            pointer-events: none;
+        .nomMovie::before
+            content: "Nominated";
+        .nomMovie:hover
+            background-color: darkgoldenrod;
+            color: white;
+            cursor: pointer;
+        .nomMovie:hover::before
+            color: white;
+            content: "Deselect";
+
         .nomEnough
             background-color: gray;
             color: white;
