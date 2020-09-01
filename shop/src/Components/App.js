@@ -116,7 +116,12 @@ nominatedMovie = (movie) => {
   if (this.state.nominated[0].imdbID === "empty") {
     this.setState({nominated: [movie]});
   }
-  this.state.nominated.push(movie)
+
+  else {
+    this.setState({nominated: [...this.state.nominated, movie]});
+
+  }
+
   console.log(this.state.nominated, 'this is the nominated movie after')
 }
 
@@ -124,7 +129,7 @@ nominatedMovie = (movie) => {
     return (
       <div className='Main'>
         <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} />
-        <Movies movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} />
+        <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} />
         <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} />
       </div>
     );

@@ -33,7 +33,7 @@ class Nominated extends Component {
             </section>
             <div className='nominated'>
             {this.props.nominated.map((award, index) => {
-                 return <NomSingle key={award.imdbID + index} award={award} />
+                 return <NomSingle key={award.imdbID} award={award} />
              })}
             </div>
             </footer>
