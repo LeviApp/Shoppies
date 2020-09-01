@@ -1,44 +1,45 @@
 import React, { Component }  from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import NomSingle from './NomSingle'
 
 import '../SASS/Nominated.sass';
 
 // import {BrowserRouter as Router,Route, NavLink, Redirect} from 'react-router-dom';
 
-class Nominated extends Component {
+const Nominated = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-         
+        const {loginWithRedirect, logout, user, isAuthenticated} = useAuth0()
+
+        let log =   <div className='login'>
+                        <h1 onClick={() => loginWithRedirect()}>Log in</h1>
+                    </div>
+
+        if (isAuthenticated) {
+            log =   <div className='logout'>
+                        <h2>{user.name} |</h2>
+                        <h1 onClick={() => logout()}>Log out</h1>
+                    </div>
         }
-        }
 
-        componentDidMount() {
 
-        }
-
-        render() {
           return (
             <footer className="nominatedContainer">
             <section>
                 <div className='loggedin nombutton'>
                     <h1>★ Nominated ★</h1>
-                    <button className='nominatedarrow' onClick={() => this.props.nominatedShow()}>›</button>
+                    <button className='nominatedarrow' onClick={() => props.nominatedShow()}>›</button>
                 </div>
 
-                <div className='login'>
-                    <h1 onClick={this.props.loggedIn}>Login</h1>
-                </div>
+                {log}
             </section>
             <div className='nominated'>
-            {this.props.nominated.map((award) => {
-                 return <NomSingle key={award.imdbID + award.Year} ID={award.imdbID + award.Year} award={award} deleteNom={this.props.deleteNom} />
+            {props.nominated.map((award) => {
+                 return <NomSingle key={award.imdbID + award.Year} ID={award.imdbID + award.Year} award={award} deleteNom={props.deleteNom} />
              })}
             </div>
             </footer>
         );
-        }
+    
 
   }
   
