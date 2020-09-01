@@ -1,15 +1,35 @@
 .nomIndividual
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px;
-    background-color: gold;
-    width: 250px;
-    img
-        width: 20%
     h1
-        margin-left: 10px;
-        font-size: 1rem;
-        width: 70%;
-        color: black;
+        font-size: 1.25rem;
+        background-color: gold;
+        width: 250px;
         text-align: center;
+    .deselect:hover
+        background-color: darkgoldenrod;
+        color: white;
+        cursor: pointer;
+    .card
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px 20px 20px 20px;
+        background-color: gold;
+        width: 250px;
+        height: 75px;
+        img
+            width: 20%
+            height: 75px;
+            object-fit: cover;
+        div
+            display: flex;
+            flex-direction: column
+            h1
+                margin-left: 10px;
+                font-size: 1rem;
+                width: 90%;
+                color: black;
+                text-align: center;

@@ -19,10 +19,10 @@ class App extends Component {
       totalPages: 0,
       nominated: [{
         "Title": "Nominated Movies",
-        "Year": "1977",
+        "Year": "",
         "imdbID": "empty",
         "Type": "movie",
-        "Poster": "https://upload.wikimedia.org/wikipedia/en/c/cd/Canadian_Screen_Award_trophy.png"
+        "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
       }],
       open: false,
   }
@@ -125,12 +125,28 @@ nominatedMovie = (movie) => {
   console.log(this.state.nominated, 'this is the nominated movie after')
 }
 
+deleteNom = (id) => {
+  if (this.state.nominated.length === 1) {
+    this.setState({nominated: [...this.state.nominated.filter(nom => nom.imdbID + nom.Year !== id),     {
+      "Title": "Nominated Movies",
+      "Year": "",
+      "imdbID": "empty",
+      "Type": "movie",
+      "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+    } ]});
+  }
+
+  else {
+    this.setState({nominated: this.state.nominated.filter(nom => nom.imdbID + nom.Year !== id)});
+  }
+}
+
   render() {
     return (
       <div className='Main'>
         <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} />
-        <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} />
-        <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} />
+        <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} deleteNom={this.deleteNom} />
+        <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} deleteNom={this.deleteNom} />
       </div>
     );
   }
