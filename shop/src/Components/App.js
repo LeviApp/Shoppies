@@ -77,7 +77,6 @@ class App extends Component {
 searchMovies = () => {
     axios.get(`https://www.omdbapi.com/?s=${this.state.search}&type=movie&page=1&apikey=e7fa079b`)
     .then(response => {
-      console.log(response, 'this is the response I get!')
       if (response.data['Response'] === 'True') {
         this.setState({movies: response.data['Search'], page: 1, totalPages: Math.ceil(Number(response.data['totalResults'])/10), error: false, });
       }
@@ -127,11 +126,9 @@ nominatedShow = () => {
     nom.style.display = 'none';
     nomarr.style.transform = 'rotate(-90deg)';
   }
-  console.log(nom, nomarr)
 }
 
 nominatedMovie = (movie) => {
-  console.log(this.state.nominated, 'this is the nominated movie before')
 
   if (this.state.nominated[0].imdbID === "empty") {
     this.setState({nominated: [movie]});
@@ -141,8 +138,6 @@ nominatedMovie = (movie) => {
     this.setState({nominated: [...this.state.nominated, movie]});
 
   }
-
-  console.log(this.state.nominated, 'this is the nominated movie after')
 }
 
 deleteNom = (id) => {
