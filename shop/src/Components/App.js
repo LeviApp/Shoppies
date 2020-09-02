@@ -77,6 +77,7 @@ class App extends Component {
 searchMovies = () => {
     axios.get(`https://www.omdbapi.com/?s=${this.state.search}&type=movie&page=1&apikey=e7fa079b`)
     .then(response => {
+      console.log(response, 'this is the response I get!')
       if (response.data['Response'] === 'True') {
         this.setState({movies: response.data['Search'], page: 1, totalPages: Math.ceil(Number(response.data['totalResults'])/10), error: false, });
       }
