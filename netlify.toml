@@ -1,6 +1,6 @@
 [build]
 base = "shop/"
-publish = "shop/build/"
+publish = "build/"
 command = "CI= yarn build"
 
 [[redirects]]
