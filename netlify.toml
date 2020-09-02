@@ -1,0 +1,10 @@
+[build]
+base = "shop/"
+publish = "shop/build/"
+command = "CI= yarn build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+

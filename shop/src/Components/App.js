@@ -28,11 +28,30 @@ class App extends Component {
   }
   }
 
-
   
 
   
   componentDidMount() {
+    // axios.get('http://127.0.0.1:8000/shoppies/api/awards/', {
+    //   headers: {
+    //     userID: '4444'
+    //   }
+    //  }).then(response => {
+    //    if (response.data.length >=1) {
+    //     this.setState({nominated: response.data});
+    //    }
+
+    //    else {
+    //     this.setState({nominated: [{
+    //       "Title": "Nominated Movies",
+    //       "Year": "",
+    //       "imdbID": "empty",
+    //       "Type": "movie",
+    //       "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+    //     }]});
+
+    //    }}).catch(err => console.log('There is a Quote Error'))
+
 
   }
 
