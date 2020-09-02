@@ -75,8 +75,9 @@ class App extends Component {
   }
 
 searchMovies = () => {
-    axios.get(`http://www.omdbapi.com/?s=${this.state.search}&type=movie&page=1&apikey=e7fa079b`)
+    axios.get(`https://www.omdbapi.com/?s=${this.state.search}&type=movie&page=1&apikey=e7fa079b`)
     .then(response => {
+      console.log(response, 'this is the response I get!')
       if (response.data['Response'] === 'True') {
         this.setState({movies: response.data['Search'], page: 1, totalPages: Math.ceil(Number(response.data['totalResults'])/10), error: false, });
       }
@@ -97,7 +98,7 @@ moviesMove = (val) => {
   else if (correctVal === 0) {
     correctVal = this.state.totalPages
   }
-  axios.get(`http://www.omdbapi.com/?s=${this.state.search}&type=movie&page=${correctVal}&apikey=e7fa079b`)
+  axios.get(`https://www.omdbapi.com/?s=${this.state.search}&type=movie&page=${correctVal}&apikey=e7fa079b`)
   .then(response => {
     if (response.data['Response'] === 'True') {
       this.setState({movies: response.data['Search'], page: correctVal, totalPages: Math.ceil(Number(response.data['totalResults'])/10), error: false, });
