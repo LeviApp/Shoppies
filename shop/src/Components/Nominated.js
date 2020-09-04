@@ -34,7 +34,7 @@ const Nominated = (props) => {
             </section>
             <div className='nominated'>
             {props.nominated.map((award) => {
-                 return <NomSingle key={award.imdbID + award.Year} ID={award.imdbID + award.Year} award={award} deleteNom={props.deleteNom} />
+                 return <NomSingle key={award.imdbID + award.Year} ID={award.imdbID} award={award} deleteNom={props.deleteNom} />
              })}
             </div>
             </footer>
