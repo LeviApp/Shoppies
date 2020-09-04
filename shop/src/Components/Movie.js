@@ -2,35 +2,27 @@ import '../SASS/Movie.sass';
 
 import React, { Component } from 'react';
 // import {BrowserRouter as Router,Route, NavLink, Redirect} from 'react-router-dom';
-
-class Movie extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-         
-        }
-        }
-
-        componentDidMount() {
-
-        }
+import { useAuth0 } from '@auth0/auth0-react';
 
 
-    render() {
-        let nominateButton = <button onClick={() => this.props.nominatedMovie(this.props.movie)}>Nominate</button>
-        let SRC = this.props.movie['Poster'];
 
 
-        if (this.props.nominated.filter(nom => nom['imdbID']+nom['Year'] === this.props.ID).length === 1) {
-            nominateButton = <button className='nomMovie' onClick={() => this.props.deleteNom(this.props.ID)}></button>
+const Movie = (props) => {
+    const {user} = useAuth0()
+
+        let nominateButton = <button onClick={() => props.nominatedMovie(props.movie, user.sub.substring(6))}>Nominate</button>
+        let SRC = props.movie['Poster'];
+
+
+        if (props.nominated.filter(nom => nom['imdbID']+nom['Year'] === props.ID).length === 1) {
+            nominateButton = <button className='nomMovie' onClick={() => props.deleteNom(props.ID)}></button>
 
         }
-        else if (this.props.nominated.length === 5) {
+        else if (props.nominated.length === 5) {
             nominateButton = <button disabled={true} className='nomEnough'>Limit Reached</button>
         }
         
-        if (this.props.movie['Poster'] === 'N/A') {
+        if (props.movie['Poster'] === 'N/A') {
             SRC = 'https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png'
         }
         
@@ -39,13 +31,13 @@ class Movie extends Component {
             <div className='movieIndividual'>
                 <img src={SRC} alt="" />
                 <div>
-                    <h1>{this.props.movie['Title']}</h1>
-                    <h2>{this.props.movie['Year']}</h2>
+                    <h1>{props.movie['Title']}</h1>
+                    <h2>{props.movie['Year']}</h2>
                     {nominateButton}
                 </div>
             </div>
         )
     }
-}
+
 
 export default Movie
