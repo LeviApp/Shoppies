@@ -25,6 +25,7 @@ class App extends Component {
         "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
       }],
       open: false,
+      sMovie: {}
   }
   }
 
@@ -32,25 +33,28 @@ class App extends Component {
 
   
   componentDidMount() {
-    // axios.get('http://127.0.0.1:8000/shoppies/api/awards/', {
-    //   headers: {
-    //     userID: '4444'
-    //   }
-    //  }).then(response => {
-    //    if (response.data.length >=1) {
-    //     this.setState({nominated: response.data});
-    //    }
+    axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
+      headers: {
+        "userID": '!!!!!!!!!!',
+        "Access-Control-Allow-Origin": "*"
+      }
+     }).then(response => {
+       console.log(response, 'and your verdict?')
+       if (response.data.length >=1) {
+         console.log('this needs to work')
+        this.setState({nominated: response.data});
+       }
 
-    //    else {
-    //     this.setState({nominated: [{
-    //       "Title": "Nominated Movies",
-    //       "Year": "",
-    //       "imdbID": "empty",
-    //       "Type": "movie",
-    //       "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-    //     }]});
+       else {
+        this.setState({nominated: [{
+          "Title": "Nominated Movies",
+          "Year": "",
+          "imdbID": "empty",
+          "Type": "movie",
+          "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+        }]});
 
-    //    }}).catch(err => console.log('There is a Quote Error'))
+       }}).catch(err => console.log('There is a Quote Error'))
 
 
   }
@@ -128,17 +132,23 @@ nominatedShow = () => {
   }
 }
 
-nominatedMovie = (movie) => {
+nominatedMovie = (movie, val) => {
+  let savedMovie = movie;
+  savedMovie['userID'] = val
+  console.log(savedMovie, 'this is saved before')
+axios.post('http://127.0.0.1:8000/shoppies/api/awards/', savedMovie, {headers: {
+    userID: val}})
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+ 
+ console.log(savedMovie, 'after the then')
 
-  if (this.state.nominated[0].imdbID === "empty") {
-    this.setState({nominated: [movie]});
-  }
-
-  else {
-    this.setState({nominated: [...this.state.nominated, movie]});
-
-  }
 }
+
 
 deleteNom = (id) => {
   if (this.state.nominated.length === 1) {
