@@ -33,30 +33,32 @@ class App extends Component {
 
   
   componentDidMount() {
-    axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
-      headers: {
-        "userID": '!!!!!!!!!!',
-        "Access-Control-Allow-Origin": "*"
-      }
-     }).then(response => {
-       console.log(response, 'and your verdict?')
-       if (response.data.length >=1) {
-         console.log('this needs to work')
-        this.setState({nominated: response.data});
-       }
 
-       else {
-        this.setState({nominated: [{
-          "Title": "Nominated Movies",
-          "Year": "",
-          "imdbID": "empty",
-          "Type": "movie",
-          "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-        }]});
+    // axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
+    //   headers: {
+    //     userID: '!!!!!!!!!!'
+    //   }
+    //  }).then(response => {
+    //    console.log(response, 'and your verdict?')
+    //    if (response.data.length >=1) {
+    //      console.log('this needs to work')
+    //     this.setState({nominated: response.data});
+    //    }
 
-       }}).catch(err => console.log('There is a Quote Error'))
+    //    else {
+    //     this.setState({nominated: [{
+    //       "Title": "Nominated Movies",
+    //       "Year": "",
+    //       "imdbID": "empty",
+    //       "Type": "movie",
+    //       "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+    //     }]});
 
+    //    }}).catch(err => console.log('There is a Quote Error', err))
+    let val = localStorage.getItem('nominatedMovies');
 
+    console.log(val, 'this is local storage beginning')
+    this.state.nominated = JSON.parse(val)
   }
 
   componentWillUnmount() {
@@ -133,36 +135,58 @@ nominatedShow = () => {
 }
 
 nominatedMovie = (movie, val) => {
-  let savedMovie = movie;
-  savedMovie['userID'] = val
-  console.log(savedMovie, 'this is saved before')
-axios.post('http://127.0.0.1:8000/shoppies/api/awards/', savedMovie, {headers: {
-    userID: val}})
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+//   let savedMovie = movie;
+//   savedMovie['userID'] = val
+//   console.log(savedMovie, 'this is saved before')
+// axios.post('http://127.0.0.1:8000/shoppies/api/awards/', savedMovie, {headers: {
+//     userID: val}})
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
  
- console.log(savedMovie, 'after the then')
+//  console.log(savedMovie, 'after the then')
 
+if (this.state.nominated[0].imdbID === "empty") {
+  this.setState({nominated: [movie]});
+  console.log('this is the value of nominate', this.state.nominated)
+  window.localStorage.setItem('nominatedMovies', JSON.stringify([movie]));
+
+}
+
+else {
+  this.setState({nominated: [...this.state.nominated, movie]});
+  window.localStorage.setItem('nominatedMovies', JSON.stringify([...this.state.nominated, movie]));
+
+}
 }
 
 
 deleteNom = (id) => {
   if (this.state.nominated.length === 1) {
-    this.setState({nominated: [...this.state.nominated.filter(nom => nom.imdbID + nom.Year !== id),     {
+    this.setState({nominated: [{
       "Title": "Nominated Movies",
       "Year": "",
       "imdbID": "empty",
       "Type": "movie",
       "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
     } ]});
+    window.localStorage.setItem('nominatedMovies', JSON.stringify([{
+      "Title": "Nominated Movies",
+      "Year": "",
+      "imdbID": "empty",
+      "Type": "movie",
+      "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+    } ]));
+
   }
 
   else {
-    this.setState({nominated: this.state.nominated.filter(nom => nom.imdbID + nom.Year !== id)});
+    this.setState({nominated: this.state.nominated.filter(nom => nom.imdbID !== id)});
+    window.localStorage.setItem('nominatedMovies', JSON.stringify(this.state.nominated.filter(nom => nom.imdbID !== id)));
+
   }
 }
 
