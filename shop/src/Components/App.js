@@ -17,13 +17,7 @@ class App extends Component {
       error: false,
       page: 1,
       totalPages: 0,
-      nominated: [{
-        "Title": "Nominated Movies",
-        "Year": "",
-        "imdbID": "empty",
-        "Type": "movie",
-        "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-      }],
+      nominated: [],
       open: false,
       sMovie: {}
   }
@@ -55,9 +49,16 @@ class App extends Component {
     //     }]});
 
     //    }}).catch(err => console.log('There is a Quote Error', err))
-    let val = localStorage.getItem('nominatedMovies');
+    let val = localStorage.getItem('nominatedMovies') || [{
+      "Title": "Nominated Movies",
+      "Year": "",
+      "imdbID": "empty",
+      "Type": "movie",
+      "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+    }];
 
     console.log(val, 'this is local storage beginning')
+
     this.state.nominated = JSON.parse(val)
   }
 
