@@ -50,7 +50,8 @@ class App extends Component {
 
     //    }}).catch(err => console.log('There is a Quote Error', err))
     let val = localStorage.getItem('nominatedMovies')
-    console.log(val, 'before')
+    let congrats = document.getElementsByClassName('modal')[0]
+    console.log(congrats, 'before')
     if (val === null) {
       console.log(val, 'between')
 
@@ -64,6 +65,10 @@ class App extends Component {
     }
     else {
       this.state.nominated = JSON.parse(val)
+
+      if (JSON.parse(val).length === 5) {
+        congrats.style.visibility = 'visible'
+      }
       console.log(val, 'after')
 
     }
@@ -165,9 +170,13 @@ if (this.state.nominated[0].imdbID === "empty") {
 }
 
 else {
+  let congrats = document.getElementsByClassName('modal')[0]
+
   this.setState({nominated: [...this.state.nominated, movie]});
   window.localStorage.setItem('nominatedMovies', JSON.stringify([...this.state.nominated, movie]));
-
+  if ([...this.state.nominated, movie].length === 5) {
+      congrats.style.visibility = 'visible'
+  }
 }
 }
 
@@ -192,9 +201,13 @@ deleteNom = (id) => {
   }
 
   else {
+    let congrats = document.getElementsByClassName('modal')[0]
+
     this.setState({nominated: this.state.nominated.filter(nom => nom.imdbID !== id)});
     window.localStorage.setItem('nominatedMovies', JSON.stringify(this.state.nominated.filter(nom => nom.imdbID !== id)));
-
+    if (this.state.nominated.filter(nom => nom.imdbID !== id).length === 4) {
+      congrats.style.visibility = "hidden"
+    }
   }
 }
 
