@@ -14,7 +14,7 @@ const Movie = (props) => {
         let SRC = props.movie['Poster'];
 
 
-        if (props.nominated.filter(nom => nom['imdbID']+nom['Year'] === props.ID).length === 1) {
+        if (props.nominated.filter(nom => nom['imdbID'] === props.ID).length === 1) {
             nominateButton = <button className='nomMovie' onClick={() => props.deleteNom(props.ID)}></button>
 
         }

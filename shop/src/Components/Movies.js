@@ -33,7 +33,7 @@ const Movies = (props) => {
                 {message}
                 <div className='moviesContainer'>
               {props.movies.map((movie) => {
-                  return <Movie movie={movie} nominated={props.nominated} key={movie.imdbID} ID={movie.imdbID + movie.Year} nominatedMovie={props.nominatedMovie} deleteNom={props.deleteNom} />
+                  return <Movie movie={movie} nominated={props.nominated} key={movie.imdbID} ID={movie.imdbID} nominatedMovie={props.nominatedMovie} deleteNom={props.deleteNom} />
               })}
                 </div>
             </div>
