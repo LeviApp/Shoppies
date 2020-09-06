@@ -12,11 +12,15 @@
         background-color: #FBF7ED;
         width: 100%;
         justify-content: center;
+        @media screen and (max-width: 2800px) 
+            top: 150px;
         button
             background-color: transparent;
             border: 0;
             font-size: 2.5rem;
             color: #818A91
+            @media screen and (max-width: 2800px) 
+                font-size: 3.5rem;
         button:hover
             color: #42474C
 
@@ -27,15 +31,29 @@
             margin-top: 11px;
             font-size: 1.5rem;
             color: #42474C
+            @media screen and (max-width: 2800px) 
+                font-size: 2.5rem;
+                margin-top: 15px;
+    
 
     .messageEmpty
         color: #007F60;
         visibility: hidden;
+        @media screen and (max-width: 2800px) 
+            font-size: 3.5rem;
+            margin-top: 115px;
     .messageInvalid
         color: red
+        @media screen and (max-width: 2800px) 
+            font-size: 3.5rem;
+            margin-top: 115px;
     .moviesContainer
         display: flex;
         flex-direction: row;
         width: 100%;
         flex-wrap: wrap;
         justify-content: center;
+
+
+
+
