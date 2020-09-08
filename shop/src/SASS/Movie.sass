@@ -1,12 +1,25 @@
 .movieIndividual
-    width: 225px;
+    width: 425px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     margin: 20px;
+    @media screen and (max-width: 2800px) 
+        width: 425px;
+    @media screen and (max-width: 1920px) 
+        width: 225px;
     img
         width: 100%;
+    img:before 
+        content: ' ';
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        height: 300px;
+        width: 100%;
+        background-image: url('https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png');
     h1
         color:
     div

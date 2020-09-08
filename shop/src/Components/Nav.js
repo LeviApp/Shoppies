@@ -22,7 +22,7 @@ const Nav = (props) => {
           return (
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
-              <input className='loggedin' placeholder="◎ Search for Movie Title" onChange={props.inputHandler}></input>
+              <input className='loggedin' placeholder="◎ Search for Movie Title" onChange={props.inputHandler} onKeyDown={props.searchMoviesEnter}></input>
               <button className='loggedin' onClick={props.searchMovies}>Search</button>
             </header>
         );

@@ -29,7 +29,7 @@ const Nominated = (props) => {
                     <h1>★ Nominated ★</h1>
                     <button className='nominatedarrow' onClick={() => props.nominatedShow()}>›</button>
                 </div>
-                <h1 className='modal'>Congratulations! You Finished Nominating 5 Movies</h1>
+                <h1 className='modal'>Congratulations! You Finished Nominating 5 Movies.</h1>
                 {log}
             </section>
             <div className='nominated'>

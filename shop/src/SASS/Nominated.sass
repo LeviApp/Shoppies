@@ -6,7 +6,8 @@ footer
     background-color: #002E25
     width: 100%
     justify-content: center;
-    align-items: center;    
+    align-items: center;
+    max-width: 2800px;
     section
         display: flex;
         justify-content: space-around;
@@ -18,58 +19,83 @@ footer
             visibility: hidden;
 
             h1
-                font-size: 1.25rem;
+                font-size: 2.25rem;
                 color: gold;
                 padding-top: 10px;
                 @media screen and (max-width: 2800px) 
-                    font-size: 2.25rem;  
+                    font-size: 2.25rem;
+                @media screen and (max-width: 1920px) 
+                    font-size: 1.5rem;
+                @media screen and (max-width: 1366px) 
+                    font-size: 1.25rem;  
             button
                 background-color: transparent
                 color: white;
                 border: 0;
                 transform: rotate(-90deg);
-                font-size: 2rem;
-                margin: 5px 0 0 15px;
+                font-size: 3rem;
+                margin: 10px 0 0 15px;
                 @media screen and (max-width: 2800px) 
                     font-size: 3rem;
                     margin: 10px 0 0 15px;
-
+                @media screen and (max-width: 1920px) 
+                    font-size: 2rem;
+                    margin: 5px 0 0 15px;
+                @media screen and (max-width: 1366px) 
+                    font-size: 1.25rem;  
             button:hover
                 color: gold;
         .login
             h1
-                font-size: 1.25rem;
+                font-size: 3.5rem;
                 color: white;
                 padding-bottom: 10px;
                 @media screen and (max-width: 2800px) 
                     font-size: 3.5rem;
-            margin-top: 115px;
+                @media screen and (max-width: 1920px) 
+                    font-size: 1.25rem;
             h1:hover
                 cursor: pointer
                 border-bottom: 2px solid white;
         .logout
             display: flex;
             h1
-                font-size: 1.25rem;
+                font-size: 2.25rem;
                 color: white;
-                padding-bottom: 10px;
                 @media screen and (max-width: 2800px) 
                     font-size: 2.25rem;
+                @media screen and (max-width: 1920px) 
+                    font-size: 1.5rem;
+                @media screen and (max-width: 1366px) 
+                    font-size: 1rem;  
             h1:hover
                 cursor: pointer
                 border-bottom: 2px solid white;
             h2
-                font-size: 1.25rem;
+                font-size: 2.25rem;
                 color: white;
-                padding: 0 10px 10px 0;
+                padding: 0 10px 0 0;
                 @media screen and (max-width: 2800px) 
-                    font-size: 2.25rem;  
-        
+                    font-size: 2.25rem;
+                @media screen and (max-width: 1920px) 
+                    font-size: 1.5rem;  
+                @media screen and (max-width: 1366px) 
+                    font-size: 1rem;  
     .nominated
         display: none;
-
+        flex-direction: row;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
 .modal
     background-color: white;
     border: 4px solid gold
     padding: 10px;
     visibility: hidden;
+    font-size: 2rem
+    @media screen and (max-width: 2800px) 
+        font-size: 2rem;  
+    @media screen and (max-width: 1920px) 
+        font-size: 1.5rem;
+    @media screen and (max-width: 1366px) 
+        font-size: 1rem;  
