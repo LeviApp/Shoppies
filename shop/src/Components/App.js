@@ -108,6 +108,24 @@ searchMovies = () => {
     .catch(err => this.setState({movies: []}))
 }
 
+searchMoviesEnter = (event) => {
+  event.persist()
+  if (event.keyCode === 13) {
+    axios.get(`https://www.omdbapi.com/?s=${this.state.search}&type=movie&page=1&apikey=e7fa079b`)
+    .then(response => {
+      if (response.data['Response'] === 'True') {
+        this.setState({movies: response.data['Search'], page: 1, totalPages: Math.ceil(Number(response.data['totalResults'])/10), error: false, });
+      }
+  
+      else {
+        this.setState({movies: [], error: true})
+      }
+  }
+   )
+    .catch(err => this.setState({movies: []}))
+  }
+}
+
 moviesMove = (val) => {
   let correctVal = val;
   if (correctVal === this.state.totalPages+1) {
@@ -147,7 +165,7 @@ nominatedShow = () => {
   }
 }
 
-nominatedMovie = (movie, val) => {
+nominatedMovie = (movie) => {
 //   let savedMovie = movie;
 //   savedMovie['userID'] = val
 //   console.log(savedMovie, 'this is saved before')
@@ -171,6 +189,7 @@ if (this.state.nominated[0].imdbID === "empty") {
 
 else {
   let congrats = document.getElementsByClassName('modal')[0]
+  console.log('this is the value of nominate', movie.Poster)
 
   this.setState({nominated: [...this.state.nominated, movie]});
   window.localStorage.setItem('nominatedMovies', JSON.stringify([...this.state.nominated, movie]));
@@ -211,11 +230,21 @@ deleteNom = (id) => {
   }
 }
 
+imageErr = (movieVal) => {
+  console.log(movieVal, 'this is e squared')
+  var http = new XMLHttpRequest();
+  let test = http.open('HEAD', movieVal, false);
+  console.log(test, 'this is only a test')
+  http.send();
+  return http.status==200;
+
+}
+
   render() {
     return (
       <div className='Main'>
-        <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} />
-        <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} deleteNom={this.deleteNom} />
+        <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} searchMoviesEnter={this.searchMoviesEnter} />
+        <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} deleteNom={this.deleteNom} imageErr={this.imageErr} />
         <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} deleteNom={this.deleteNom} />
       </div>
     );

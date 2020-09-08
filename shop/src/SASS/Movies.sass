@@ -4,23 +4,28 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+    @media screen and (max-width: 2800px) 
+        margin: 120px 20px 100px 20px;
     .nav-arrows
         display: flex;
         position: fixed;
-        top: 75px;
+        top: 150px;
         background-color: #FBF7ED;
         width: 100%;
         justify-content: center;
         @media screen and (max-width: 2800px) 
             top: 150px;
+        @media screen and (max-width: 1920px) 
+            top: 80px;
         button
             background-color: transparent;
             border: 0;
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             color: #818A91
             @media screen and (max-width: 2800px) 
                 font-size: 3.5rem;
+            @media screen and (max-width: 1920px) 
+                font-size: 2.5rem;
         button:hover
             color: #42474C
 
@@ -29,31 +34,47 @@
             -webkit-transform: scaleX(-1);
         h3
             margin-top: 11px;
-            font-size: 1.5rem;
+            font-size: 2.5rem;
             color: #42474C
+            margin-top: 15px;
             @media screen and (max-width: 2800px) 
                 font-size: 2.5rem;
                 margin-top: 15px;
-    
+            @media screen and (max-width: 1920px) 
+                font-size: 1.5rem;
+                margin-top: 11px;
 
     .messageEmpty
         color: #007F60;
         visibility: hidden;
+        font-size: 3.5rem;
+        margin-top: 115px;
         @media screen and (max-width: 2800px) 
             font-size: 3.5rem;
             margin-top: 115px;
+        @media screen and (max-width: 1920px) 
+            font-size: 2.5rem;
+            margin-top: 100px;
+
     .messageInvalid
-        color: red
+        color: red;
+        font-size: 3.5rem;
+        margin-top: 115px;
         @media screen and (max-width: 2800px) 
             font-size: 3.5rem;
             margin-top: 115px;
+        @media screen and (max-width: 1920px) 
+            font-size: 2.5rem;
+            margin-top: 100px;
+
     .moviesContainer
         display: flex;
         flex-direction: row;
         width: 100%;
         flex-wrap: wrap;
         justify-content: center;
-
-
-
+        @media screen and (max-width: 2800px) 
+            margin-top: 150px;
+        @media screen and (max-width: 1920px) 
+            margin-top: 60px;
 
