@@ -8,7 +8,7 @@
 
 -- Focuses on Frontend Development. 
 
--- UI / UX Design Follows Shopify's Example (for Shopify's expanded section of movie award shows).  
+-- UI / UX Design Follows Shopify's Example (for Shopify's Expanded Section of Movie Award Shows).  
 
 -- Focuses on Responsive Web Design. 
 
