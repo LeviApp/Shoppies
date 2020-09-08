@@ -51,10 +51,7 @@ class App extends Component {
     //    }}).catch(err => console.log('There is a Quote Error', err))
     let val = localStorage.getItem('nominatedMovies')
     let congrats = document.getElementsByClassName('modal')[0]
-    console.log(congrats, 'before')
     if (val === null) {
-      console.log(val, 'between')
-
       this.setState({nominated: [{
         "Title": "Nominated Movies",
         "Year": "",
@@ -69,8 +66,6 @@ class App extends Component {
       if (JSON.parse(val).length === 5) {
         congrats.style.visibility = 'visible'
       }
-      console.log(val, 'after')
-
     }
   }
 
@@ -182,14 +177,12 @@ nominatedMovie = (movie) => {
 
 if (this.state.nominated[0].imdbID === "empty") {
   this.setState({nominated: [movie]});
-  console.log('this is the value of nominate', this.state.nominated)
   window.localStorage.setItem('nominatedMovies', JSON.stringify([movie]));
 
 }
 
 else {
   let congrats = document.getElementsByClassName('modal')[0]
-  console.log('this is the value of nominate', movie.Poster)
 
   this.setState({nominated: [...this.state.nominated, movie]});
   window.localStorage.setItem('nominatedMovies', JSON.stringify([...this.state.nominated, movie]));
@@ -230,21 +223,11 @@ deleteNom = (id) => {
   }
 }
 
-imageErr = (movieVal) => {
-  console.log(movieVal, 'this is e squared')
-  var http = new XMLHttpRequest();
-  let test = http.open('HEAD', movieVal, false);
-  console.log(test, 'this is only a test')
-  http.send();
-  return http.status==200;
-
-}
-
   render() {
     return (
       <div className='Main'>
         <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} searchMoviesEnter={this.searchMoviesEnter} />
-        <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} deleteNom={this.deleteNom} imageErr={this.imageErr} />
+        <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} deleteNom={this.deleteNom} />
         <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} deleteNom={this.deleteNom} />
       </div>
     );
