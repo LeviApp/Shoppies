@@ -20,7 +20,7 @@ const Nav = (props) => {
       let logIn = document.getElementsByClassName('loggedin')
 
       for (let val of logIn) {
-        val.style.visibility = 'visible'
+        val.style.display = 'flex'
       }
       logTop = <div className='logoutTop'>
       <h2>{user.name} |</h2>
@@ -33,9 +33,9 @@ const Nav = (props) => {
               <img src={logo} className="App-logo" alt="logo" />
               {logTop}
               </div>
-              <div className='search'>
-              <input className='loggedin' placeholder="◎ Search for Movie Title" onChange={props.inputHandler} onKeyDown={props.searchMoviesEnter}></input>
-              <button className='loggedin' onClick={props.searchMovies}>Search</button>
+              <div className='search loggedin'>
+              <input placeholder="◎ Search for Movie Title" onChange={props.inputHandler} onKeyDown={props.searchMoviesEnter}></input>
+              <button onClick={props.searchMovies}>Search</button>
               </div>
             </header>
         );
