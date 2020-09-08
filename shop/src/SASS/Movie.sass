@@ -9,8 +9,12 @@
         width: 425px;
     @media screen and (max-width: 1920px) 
         width: 225px;
+    @media screen and (max-width: 950px) 
+        width: 200px;
     img
         width: 100%;
+        @media screen and (max-width: 950px) 
+            width: 65%;
     img:before 
         content: ' ';
         background-position: center;
@@ -32,8 +36,14 @@
             margin: 20px 0 5px 0;
             text-align: center;
             width: 90%;
+            @media screen and (max-width: 950px) 
+                font-size: 1rem;
+                margin: 5px 0 5px 0;
+    
         h2
             font-size: 1.25rem;
+            @media screen and (max-width: 950px) 
+                font-size: 0.75rem;
         button
             width: 150px;
             height: 40px;
@@ -44,6 +54,8 @@
             border: 0;
             margin-top: 10px;
             transition-duration: 200ms
+            @media screen and (max-width: 950px) 
+                font-size: 1rem; 
         button:hover
             background-color: #002E25
             cursor: pointer;
