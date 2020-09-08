@@ -26,7 +26,7 @@ const Nominated = (props) => {
             <footer className="nominatedContainer">
             <section>
                 <div className='loggedin nombutton'>
-                    <h1>★ Nominated ★</h1>
+                    <h1>Nominated</h1>
                     <button className='nominatedarrow' onClick={() => props.nominatedShow()}>›</button>
                 </div>
                 <h1 className='modal'>Congratulations! You Finished Nominating 5 Movies.</h1>

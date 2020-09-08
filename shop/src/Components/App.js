@@ -52,7 +52,6 @@ class App extends Component {
     let val = localStorage.getItem('nominatedMovies')
     let congrats = document.getElementsByClassName('modal')[0]
     if (val === null) {
-
       this.setState({nominated: [{
         "Title": "Nominated Movies",
         "Year": "",
@@ -67,7 +66,6 @@ class App extends Component {
       if (JSON.parse(val).length === 5) {
         congrats.style.visibility = 'visible'
       }
-
     }
   }
 
@@ -225,19 +223,11 @@ deleteNom = (id) => {
   }
 }
 
-imageErr = (movieVal) => {
-  var http = new XMLHttpRequest();
-  let test = http.open('HEAD', movieVal, false);
-  http.send();
-  return http.status==200;
-
-}
-
   render() {
     return (
       <div className='Main'>
         <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} searchMoviesEnter={this.searchMoviesEnter} />
-        <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} deleteNom={this.deleteNom} imageErr={this.imageErr} />
+        <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} deleteNom={this.deleteNom} />
         <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} deleteNom={this.deleteNom} />
       </div>
     );
