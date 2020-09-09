@@ -9,16 +9,17 @@
     .nav-arrows
         display: flex;
         position: fixed;
-        top: 150px;
+        top: 110px;
         background-color: #FBF7ED;
         width: 100%;
         justify-content: center;
+        max-width: 2800px;
         @media screen and (max-width: 2800px) 
-            top: 150px;
+            top: 110px;
         @media screen and (max-width: 1920px) 
             top: 80px;
         @media screen and (max-width: 950px) 
-            top: 115px;
+            top: 100px;
         button
             background-color: transparent;
             border: 0;
@@ -46,19 +47,47 @@
                 margin-top: 15px;
             @media screen and (max-width: 1920px) 
                 font-size: 1.5rem;
-                margin-top: 11px;
+                margin-top: 8px;
             @media screen and (max-width: 950px) 
                 font-size: 1rem;
+                margin-top: 12px;
+
+    .messageLoggedout
+        display: flex;
+        flex-direction: column;
+        h1
+            color: #007F60;
+            font-size: 3rem;
+            margin-top: 115px;
+            @media screen and (max-width: 2800px) 
+                font-size: 2.5rem;
+                margin-top: 115px;
+            @media screen and (max-width: 1920px) 
+                font-size: 2.5rem;
+                margin-top: 100px;
+                text-align: center;
+            @media screen and (max-width: 950px) 
+                font-size: 1.5rem;
+                margin-top: 50px;
+                text-align: center;
+        h2
+            font-size: 2rem;
+            text-align: center;
+            @media screen and (max-width: 2800px) 
+                font-size: 2rem;
+            @media screen and (max-width: 1920px) 
+                font-size: 2rem;
+            @media screen and (max-width: 950px) 
+                font-size: 1rem;
+
     .messageEmpty
         color: #007F60;
-        visibility: hidden;
-        font-size: 3.5rem;
+        font-size: 2.5rem;
         margin-top: 115px;
         @media screen and (max-width: 2800px) 
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-top: 115px;
         @media screen and (max-width: 1920px) 
-            font-size: 2.5rem;
             margin-top: 100px;
         @media screen and (max-width: 950px) 
             font-size: 1.5rem;
@@ -67,13 +96,12 @@
             
     .messageInvalid
         color: red;
-        font-size: 3.5rem;
+        font-size: 2.5rem;
         margin-top: 115px;
         @media screen and (max-width: 2800px) 
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-top: 115px;
         @media screen and (max-width: 1920px) 
-            font-size: 2.5rem;
             margin-top: 100px;
         @media screen and (max-width: 950px) 
             font-size: 1.5rem;
@@ -86,6 +114,7 @@
         width: 100%;
         flex-wrap: wrap;
         justify-content: center;
+        margin-top: 150px;
         @media screen and (max-width: 2800px) 
             margin-top: 150px;
         @media screen and (max-width: 1920px) 

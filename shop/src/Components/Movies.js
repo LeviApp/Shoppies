@@ -10,7 +10,15 @@ const Movies = (props) => {
 
         let message;
         let navarrows;
-            if (props.movies.length === 0 && props.error === false) {
+        const {isAuthenticated} = useAuth0()
+
+            if (!isAuthenticated) {
+                message = <div className='loggedin messageLoggedout'>
+                            <h1>Welcome to the Shoppies!</h1>
+                            <h2>Please log in to nominate your favorite movies.</h2>
+                          </div>
+            }
+            else if (props.movies.length === 0 && props.error === false) {
                 message = <h1 className='loggedin messageEmpty'>Search for a movie to nominate!</h1>;
                 navarrows = '';
             }
