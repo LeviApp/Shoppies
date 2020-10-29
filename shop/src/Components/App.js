@@ -28,27 +28,7 @@ class App extends Component {
   
   componentDidMount() {
     console.log('it is in mount')
-    axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
-      headers: {
-        userID: '5f4fd936146161006d25b262'
-      }
-     }).then(response => {
-       console.log(response, 'and your verdict?')
-       if (response.data.length >=1) {
-         console.log('this needs to work')
-        this.setState({nominated: response.data});
-       }
-
-       else {
-        this.setState({nominated: [{
-          "Title": "Nominated Movies",
-          "Year": "",
-          "imdbID": "empty",
-          "Type": "movie",
-          "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-        }]});
-
-       }}).catch(err => console.log('There is a Quote Error', err))
+    this.movieReload()
     // let val = localStorage.getItem('nominatedMovies')
     // let congrats = document.getElementsByClassName('modal')[0]
     // if (val === null) {
@@ -72,6 +52,14 @@ class App extends Component {
   componentWillUnmount() {
 
   }
+
+  // componentDidUpdate(newProps, newState) {
+  //   console.log('this did update', newProps, newState['nominated'].length, this.state.nominated.length)
+  // }
+
+  // componentWillUpdate(prevProps, prevState) {
+  //   // console.log('this will update', prevProps, prevState['nominated'].length, this.state.nominated.length)
+  // }
 
 
   inputHandler = (event) => {
@@ -167,8 +155,9 @@ nominatedMovie = (movie, val) => {
 axios.post('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', savedMovie, {headers: {
     userID: val}})
   .then(function (response) {
-    console.log(response);
+    console.log(response, 'this is added');
   })
+  .then(res => this.movieReload())
   .catch(function (error) {
     console.log(error);
   });
@@ -203,12 +192,34 @@ deleteNom = (id, mos) => {
   axios.delete(`https://shopify-shoppies.herokuapp.com/shoppies/api/awards/${vidID}`)
   .then(response => {
     console.log(response, 'this is deleted')
-  })
-  .then ( response => {
-    console.log(response, 'this is deleted and in second then')
+    this.movieReload()
   })
   .catch(err => console.log(err))
 }
+
+movieReload = () => {
+  axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
+    headers: {
+      userID: '5f4fd936146161006d25b262'
+    }
+   }).then(response => {
+     console.log(response, 'and your verdict?')
+     if (response.data.length >=1) {
+       console.log('this needs to work')
+      this.setState({nominated: response.data});
+     }
+
+     else {
+      this.setState({nominated: [{
+        "Title": "Nominated Movies",
+        "Year": "",
+        "imdbID": "empty",
+        "Type": "movie",
+        "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+      }]});
+
+     }}).catch(err => console.log('There is a Quote Error', err))
+ }
 
   render() {
     return (
