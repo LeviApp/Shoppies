@@ -6,12 +6,15 @@ import Movies from './Movies'
 import Nominated from './Nominated'
 
 import axios from 'axios'
+import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends Component {
+  
   constructor (props) {
     super(props);
 
     this.state = {
+      userIDENT: "",
       search: '',
       movies: [],
       error: false,
@@ -27,8 +30,8 @@ class App extends Component {
 
   
   componentDidMount() {
-    console.log('it is in mount')
-    this.movieReload()
+    const { user } = this.props.auth0;
+    this.movieReload(this.state.userIDENT)
     // let val = localStorage.getItem('nominatedMovies')
     // let congrats = document.getElementsByClassName('modal')[0]
     // if (val === null) {
@@ -131,10 +134,13 @@ moviesMove = (val) => {
   .catch(err => this.setState({movies: []}))
 }
 
-nominatedShow = () => {
+nominatedShow = (val) => {
   let nom = document.getElementsByClassName('nominated')[0]
   let nomarr = document.getElementsByClassName('nominatedarrow')[0]
-
+  if (this.state.userIDENT === '') {
+    this.setState({userIDENT: val})
+    this.movieReload(val)
+  }
   if (this.state.open === false) {
     this.setState({open: true});
     nom.style.display = 'flex';
@@ -151,18 +157,15 @@ nominatedShow = () => {
 nominatedMovie = (movie, val) => {
   let savedMovie = movie;
   savedMovie['userID'] = val
-  console.log(savedMovie, 'this is saved before')
 axios.post('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', savedMovie, {headers: {
     userID: val}})
   .then(function (response) {
-    console.log(response, 'this is added');
   })
-  .then(res => this.movieReload())
+  .then(res =>  this.movieReload(this.state.userIDENT))
   .catch(function (error) {
     console.log(error);
   });
  
- console.log(savedMovie, 'after the then')
 
 // if (this.state.nominated[0].imdbID === "empty") {
 //   this.setState({nominated: [movie]});
@@ -191,21 +194,19 @@ deleteNom = (id, mos) => {
   }
   axios.delete(`https://shopify-shoppies.herokuapp.com/shoppies/api/awards/${vidID}`)
   .then(response => {
-    console.log(response, 'this is deleted')
-    this.movieReload()
+     this.movieReload(this.state.userIDENT)
   })
   .catch(err => console.log(err))
 }
 
-movieReload = () => {
+movieReload = (val) => {
+  let congrats = document.getElementsByClassName('modal')[0]
   axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
     headers: {
-      userID: '5f4fd936146161006d25b262'
+      userID: val
     }
    }).then(response => {
-     console.log(response, 'and your verdict?')
      if (response.data.length >=1) {
-       console.log('this needs to work')
       this.setState({nominated: response.data});
      }
 
@@ -218,7 +219,16 @@ movieReload = () => {
         "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
       }]});
 
-     }}).catch(err => console.log('There is a Quote Error', err))
+     }})
+     .then(res => {
+      if (this.state.nominated.length === 5) {
+        congrats.style.visibility = 'visible'
+    }
+      else {
+        congrats.style.visibility = 'hidden'
+
+      }
+     }).catch(err => console.log('There is a Quote Error', err))
  }
 
   render() {
@@ -232,4 +242,4 @@ movieReload = () => {
   }
 }
 
-export default App;
+export default withAuth0(App);;
