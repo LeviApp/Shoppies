@@ -19,7 +19,7 @@ class NomSingle extends Component {
 
     render() {
         let SRC = this.props.award['Poster'];
-        let deselect = <h1 className='deselect' onClick={() => this.props.deleteNom(this.props.ID)}>Deselect</h1>
+        let deselect = <h1 className='deselect' onClick={() => this.props.deleteNom(this.props.ID, [this.props.award])}>Deselect</h1>
 
         if (this.props.award['Poster'] === 'N/A') {
             SRC = 'https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png'
