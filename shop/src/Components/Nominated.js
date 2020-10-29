@@ -11,7 +11,10 @@ const Nominated = (props) => {
         const {loginWithRedirect, logout, user, isAuthenticated} = useAuth0()
 
         let log =   <div className='login'>
-                        <h1 onClick={() => loginWithRedirect()}>Log in</h1>
+                        <h1 onClick={() => {
+                            loginWithRedirect()
+                        }
+                            }>Log in</h1>
                     </div>
 
         if (isAuthenticated) {
@@ -27,7 +30,7 @@ const Nominated = (props) => {
             <section>
                 <div className='loggedin nombutton'>
                     <h1>Nominated</h1>
-                    <button className='nominatedarrow' onClick={() => props.nominatedShow()}>›</button>
+                    <button className='nominatedarrow' onClick={() => props.nominatedShow(user.sub.substring(6))}>›</button>
                 </div>
                 <h1 className='modal'>Congratulations! You Finished Nominating 5 Movies.</h1>
                 {log}

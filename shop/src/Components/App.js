@@ -6,12 +6,15 @@ import Movies from './Movies'
 import Nominated from './Nominated'
 
 import axios from 'axios'
+import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends Component {
+  
   constructor (props) {
     super(props);
 
     this.state = {
+      userIDENT: "",
       search: '',
       movies: [],
       error: false,
@@ -27,7 +30,8 @@ class App extends Component {
 
   
   componentDidMount() {
-    this.movieReload()
+    const { user } = this.props.auth0;
+    this.movieReload(this.state.userIDENT)
     // let val = localStorage.getItem('nominatedMovies')
     // let congrats = document.getElementsByClassName('modal')[0]
     // if (val === null) {
@@ -130,10 +134,13 @@ moviesMove = (val) => {
   .catch(err => this.setState({movies: []}))
 }
 
-nominatedShow = () => {
+nominatedShow = (val) => {
   let nom = document.getElementsByClassName('nominated')[0]
   let nomarr = document.getElementsByClassName('nominatedarrow')[0]
-
+  if (this.state.userIDENT === '') {
+    this.setState({userIDENT: val})
+    this.movieReload(val)
+  }
   if (this.state.open === false) {
     this.setState({open: true});
     nom.style.display = 'flex';
@@ -154,7 +161,7 @@ axios.post('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', savedM
     userID: val}})
   .then(function (response) {
   })
-  .then(res => this.movieReload())
+  .then(res =>  this.movieReload(this.state.userIDENT))
   .catch(function (error) {
     console.log(error);
   });
@@ -187,17 +194,16 @@ deleteNom = (id, mos) => {
   }
   axios.delete(`https://shopify-shoppies.herokuapp.com/shoppies/api/awards/${vidID}`)
   .then(response => {
-    this.movieReload()
+     this.movieReload(this.state.userIDENT)
   })
   .catch(err => console.log(err))
 }
 
-movieReload = () => {
+movieReload = (val) => {
   let congrats = document.getElementsByClassName('modal')[0]
-
   axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
     headers: {
-      userID: '5f4fd936146161006d25b262'
+      userID: val
     }
    }).then(response => {
      if (response.data.length >=1) {
@@ -236,4 +242,4 @@ movieReload = () => {
   }
 }
 
-export default App;
+export default withAuth0(App);;
