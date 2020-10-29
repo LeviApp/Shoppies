@@ -10,7 +10,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 const Movie = (props) => {
     const {user} = useAuth0()
 
-        let nominateButton = <button onClick={() => props.nominatedMovie(props.movie)}>Nominate</button>
+        let nominateButton = <button onClick={() => props.nominatedMovie(props.movie, user.sub.substring(6))}>Nominate</button>
         let SRC = props.movie['Poster'];
 
 
