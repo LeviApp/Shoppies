@@ -193,34 +193,21 @@ axios.post('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', savedM
 }
 
 
-deleteNom = (id) => {
-  if (this.state.nominated.length === 1) {
-    this.setState({nominated: [{
-      "Title": "Nominated Movies",
-      "Year": "",
-      "imdbID": "empty",
-      "Type": "movie",
-      "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-    } ]});
-    window.localStorage.setItem('nominatedMovies', JSON.stringify([{
-      "Title": "Nominated Movies",
-      "Year": "",
-      "imdbID": "empty",
-      "Type": "movie",
-      "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-    } ]));
+deleteNom = (id, mos) => {
+  let vidID = id;
 
+  if (typeof vidID === 'string') {
+    let mosOne = mos.filter(mo => mo.imdbID === id)
+    vidID = mosOne[0].id;
   }
-
-  else {
-    let congrats = document.getElementsByClassName('modal')[0]
-
-    this.setState({nominated: this.state.nominated.filter(nom => nom.imdbID !== id)});
-    window.localStorage.setItem('nominatedMovies', JSON.stringify(this.state.nominated.filter(nom => nom.imdbID !== id)));
-    if (this.state.nominated.filter(nom => nom.imdbID !== id).length === 4) {
-      congrats.style.visibility = "hidden"
-    }
-  }
+  axios.delete(`https://shopify-shoppies.herokuapp.com/shoppies/api/awards/${vidID}`)
+  .then(response => {
+    console.log(response, 'this is deleted')
+  })
+  .then ( response => {
+    console.log(response, 'this is deleted and in second then')
+  })
+  .catch(err => console.log(err))
 }
 
   render() {
