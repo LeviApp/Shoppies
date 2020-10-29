@@ -27,7 +27,6 @@ class App extends Component {
 
   
   componentDidMount() {
-    console.log('it is in mount')
     this.movieReload()
     // let val = localStorage.getItem('nominatedMovies')
     // let congrats = document.getElementsByClassName('modal')[0]
@@ -151,18 +150,15 @@ nominatedShow = () => {
 nominatedMovie = (movie, val) => {
   let savedMovie = movie;
   savedMovie['userID'] = val
-  console.log(savedMovie, 'this is saved before')
 axios.post('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', savedMovie, {headers: {
     userID: val}})
   .then(function (response) {
-    console.log(response, 'this is added');
   })
   .then(res => this.movieReload())
   .catch(function (error) {
     console.log(error);
   });
  
- console.log(savedMovie, 'after the then')
 
 // if (this.state.nominated[0].imdbID === "empty") {
 //   this.setState({nominated: [movie]});
@@ -191,21 +187,20 @@ deleteNom = (id, mos) => {
   }
   axios.delete(`https://shopify-shoppies.herokuapp.com/shoppies/api/awards/${vidID}`)
   .then(response => {
-    console.log(response, 'this is deleted')
     this.movieReload()
   })
   .catch(err => console.log(err))
 }
 
 movieReload = () => {
+  let congrats = document.getElementsByClassName('modal')[0]
+
   axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
     headers: {
       userID: '5f4fd936146161006d25b262'
     }
    }).then(response => {
-     console.log(response, 'and your verdict?')
      if (response.data.length >=1) {
-       console.log('this needs to work')
       this.setState({nominated: response.data});
      }
 
@@ -218,7 +213,16 @@ movieReload = () => {
         "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
       }]});
 
-     }}).catch(err => console.log('There is a Quote Error', err))
+     }})
+     .then(res => {
+      if (this.state.nominated.length === 5) {
+        congrats.style.visibility = 'visible'
+    }
+      else {
+        congrats.style.visibility = 'hidden'
+
+      }
+     }).catch(err => console.log('There is a Quote Error', err))
  }
 
   render() {

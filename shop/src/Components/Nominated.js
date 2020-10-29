@@ -16,7 +16,7 @@ const Nominated = (props) => {
 
         if (isAuthenticated) {
             log =   <div className='logout'>
-                        <h2>{user.sub.substring(6)} |</h2>
+                        <h2>{user.name} |</h2>
                         <h1 onClick={() => logout()}>Log out</h1>
                     </div>
         }
