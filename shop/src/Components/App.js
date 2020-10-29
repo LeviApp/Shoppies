@@ -27,46 +27,46 @@ class App extends Component {
 
   
   componentDidMount() {
-
-    // axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
-    //   headers: {
-    //     userID: '!!!!!!!!!!'
-    //   }
-    //  }).then(response => {
-    //    console.log(response, 'and your verdict?')
-    //    if (response.data.length >=1) {
-    //      console.log('this needs to work')
-    //     this.setState({nominated: response.data});
-    //    }
-
-    //    else {
-    //     this.setState({nominated: [{
-    //       "Title": "Nominated Movies",
-    //       "Year": "",
-    //       "imdbID": "empty",
-    //       "Type": "movie",
-    //       "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-    //     }]});
-
-    //    }}).catch(err => console.log('There is a Quote Error', err))
-    let val = localStorage.getItem('nominatedMovies')
-    let congrats = document.getElementsByClassName('modal')[0]
-    if (val === null) {
-      this.setState({nominated: [{
-        "Title": "Nominated Movies",
-        "Year": "",
-        "imdbID": "empty",
-        "Type": "movie",
-        "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-      }]})
-    }
-    else {
-      this.state.nominated = JSON.parse(val)
-
-      if (JSON.parse(val).length === 5) {
-        congrats.style.visibility = 'visible'
+    console.log('it is in mount')
+    axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
+      headers: {
+        userID: '5f4fd936146161006d25b262'
       }
-    }
+     }).then(response => {
+       console.log(response, 'and your verdict?')
+       if (response.data.length >=1) {
+         console.log('this needs to work')
+        this.setState({nominated: response.data});
+       }
+
+       else {
+        this.setState({nominated: [{
+          "Title": "Nominated Movies",
+          "Year": "",
+          "imdbID": "empty",
+          "Type": "movie",
+          "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+        }]});
+
+       }}).catch(err => console.log('There is a Quote Error', err))
+    // let val = localStorage.getItem('nominatedMovies')
+    // let congrats = document.getElementsByClassName('modal')[0]
+    // if (val === null) {
+    //   this.setState({nominated: [{
+    //     "Title": "Nominated Movies",
+    //     "Year": "",
+    //     "imdbID": "empty",
+    //     "Type": "movie",
+    //     "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+    //   }]})
+    // }
+    // else {
+    //   this.state.nominated = JSON.parse(val)
+
+    //   if (JSON.parse(val).length === 5) {
+    //     congrats.style.visibility = 'visible'
+    //   }
+    // }
   }
 
   componentWillUnmount() {
@@ -160,36 +160,36 @@ nominatedShow = () => {
   }
 }
 
-nominatedMovie = (movie) => {
-//   let savedMovie = movie;
-//   savedMovie['userID'] = val
-//   console.log(savedMovie, 'this is saved before')
-// axios.post('http://127.0.0.1:8000/shoppies/api/awards/', savedMovie, {headers: {
-//     userID: val}})
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
+nominatedMovie = (movie, val) => {
+  let savedMovie = movie;
+  savedMovie['userID'] = val
+  console.log(savedMovie, 'this is saved before')
+axios.post('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', savedMovie, {headers: {
+    userID: val}})
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
  
-//  console.log(savedMovie, 'after the then')
+ console.log(savedMovie, 'after the then')
 
-if (this.state.nominated[0].imdbID === "empty") {
-  this.setState({nominated: [movie]});
-  window.localStorage.setItem('nominatedMovies', JSON.stringify([movie]));
+// if (this.state.nominated[0].imdbID === "empty") {
+//   this.setState({nominated: [movie]});
+//   window.localStorage.setItem('nominatedMovies', JSON.stringify([movie]));
 
-}
+// }
 
-else {
-  let congrats = document.getElementsByClassName('modal')[0]
+// else {
+//   let congrats = document.getElementsByClassName('modal')[0]
 
-  this.setState({nominated: [...this.state.nominated, movie]});
-  window.localStorage.setItem('nominatedMovies', JSON.stringify([...this.state.nominated, movie]));
-  if ([...this.state.nominated, movie].length === 5) {
-      congrats.style.visibility = 'visible'
-  }
-}
+//   this.setState({nominated: [...this.state.nominated, movie]});
+//   window.localStorage.setItem('nominatedMovies', JSON.stringify([...this.state.nominated, movie]));
+//   if ([...this.state.nominated, movie].length === 5) {
+//       congrats.style.visibility = 'visible'
+//   }
+// }
 }
 
 
