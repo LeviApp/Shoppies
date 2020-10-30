@@ -21,6 +21,7 @@ class App extends Component {
       page: 1,
       totalPages: 0,
       nominated: [],
+      winners: [],
       open: false,
       sMovie: {}
   }
@@ -200,6 +201,7 @@ deleteNom = (id, mos) => {
 }
 
 movieReload = (val) => {
+  console.log(val, 'this is the value')
   let congrats = document.getElementsByClassName('modal')[0]
   axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
     headers: {
@@ -231,12 +233,52 @@ movieReload = (val) => {
      }).catch(err => console.log('There is a Quote Error', err))
  }
 
+ allNominations = () => {
+  axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/allawards/', {
+    headers: {
+      role: 'admin'
+    }
+   }).then(response => {
+     if (response.data.length >=1) {
+      let arrSet = []
+      let individualWinners = JSON.stringify(response.data)
+  
+    for (let i = 0; i<response.data.length; i++) {
+      let moviesReg = new RegExp(response.data[i]["imdbID"], 'g')
+      let movieCount = individualWinners.match(moviesReg).length
+      response.data[i]['count'] = movieCount
+      arrSet.push(JSON.stringify({"Title": response.data[i]['Title'], "Year": response.data[i]['Year'], "Poster": response.data[i]['Poster'], "imdbID":response.data[i]['imdbID'],  "count": response.data[i]['count']}))
+    }
+
+    arrSet = [...new Set(arrSet)]
+
+    let arrSetFinal = arrSet.map(val => JSON.parse(val))
+
+    this.setState({winners: arrSetFinal})
+
+     }
+
+     else {
+      this.setState({winners: [{
+        "Title": "Nominated Movies",
+        "Year": "",
+        "imdbID": "empty",
+        "Type": "movie",
+        "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+      }]});
+
+     }})
+     .then(response => {
+     })
+    .catch(err => console.log('There is a Quote Error', err))
+ }
+
   render() {
     return (
       <div className='Main'>
         <Nav inputHandler={this.inputHandler} searchMovies={this.searchMovies} searchMoviesEnter={this.searchMoviesEnter} />
         <Movies nominated={this.state.nominated} movies={this.state.movies} error={this.state.error} totalPages={this.state.totalPages} page={this.state.page} moviesMove={this.moviesMove} nominatedMovie={this.nominatedMovie} deleteNom={this.deleteNom} />
-        <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} deleteNom={this.deleteNom} />
+        <Nominated nominated={this.state.nominated} nominatedShow={this.nominatedShow} loggedIn={this.loggedIn} deleteNom={this.deleteNom} winners={this.state.winners} allNominations={this.allNominations} />
       </div>
     );
   }
