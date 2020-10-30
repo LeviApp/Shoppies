@@ -40,12 +40,12 @@ const Nominated = (props) => {
             {props.nominated.map((award) => {
                  return <NomSingle key={award.imdbID + award.Year} ID={award.imdbID} award={award} deleteNom={props.deleteNom} />
              })}
-            </div>
             <button className='winnerButton' onClick={() => props.allNominations()}>Calculate Movie Winners</button>
             <div className='nomWinners'>
             {orderMovies.map((winner) => {
                 return <WinnerSingle key={winner.imdbID} ID={winner.imdbID} winner={winner} deleteNom={props.deleteNom} />
              })}
+            </div>
             </div>
             </footer>
         );

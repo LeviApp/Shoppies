@@ -254,7 +254,7 @@ movieReload = (val) => {
 
     let arrSetFinal = arrSet.map(val => JSON.parse(val))
 
-    this.setState({winners: arrSetFinal})
+    this.setState({winners: arrSetFinal.slice(0,5)})
 
      }
 
