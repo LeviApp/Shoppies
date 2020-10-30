@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import NomSingle from './NomSingle'
+import WinnerSingle from './WinnerSingle'
 
 import '../SASS/Nominated.sass';
 
@@ -24,7 +25,7 @@ const Nominated = (props) => {
                     </div>
         }
 
-
+        let orderMovies = props.winners.sort((x,y) => y.count - x.count)
           return (
             <footer className="nominatedContainer">
             <section>
@@ -38,6 +39,12 @@ const Nominated = (props) => {
             <div className='nominated'>
             {props.nominated.map((award) => {
                  return <NomSingle key={award.imdbID + award.Year} ID={award.imdbID} award={award} deleteNom={props.deleteNom} />
+             })}
+            </div>
+            <button className='winnerButton' onClick={() => props.allNominations()}>Calculate Movie Winners</button>
+            <div className='nomWinners'>
+            {orderMovies.map((winner) => {
+                return <WinnerSingle key={winner.imdbID} ID={winner.imdbID} winner={winner} deleteNom={props.deleteNom} />
              })}
             </div>
             </footer>

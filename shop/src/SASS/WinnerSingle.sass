@@ -1,0 +1,82 @@
+.winnerIndividual
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    @media screen and (max-width: 2800px) 
+        width: 450px;
+    @media screen and (max-width: 1920px) 
+        width: 240px;
+    @media screen and (max-width: 950px) 
+        width: 90px;
+        margin: 5px;
+        justify-content: space-around;
+    h1
+        font-size: 1.75rem;
+        background-color: gold;
+        text-align: center;
+        width: 100%
+        @media screen and (max-width: 2800px) 
+            font-size: 1.75rem
+        @media screen and (max-width: 1920px) 
+            font-size: 1.25rem
+        @media screen and (max-width: 950px) 
+            font-size: 0.5rem
+  
+    .deselect:hover
+        background-color: darkgoldenrod;
+        color: white;
+        cursor: pointer;
+    .card
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: gold;
+        width: 450px;
+        height: 150px;
+        margin-top: 5px
+        @media screen and (max-width: 2800px) 
+            width: 450px;
+            height: 150px;
+        @media screen and (max-width: 1920px) 
+            height: 75px;
+            width: 100%;
+        @media screen and (max-width: 950px) 
+            height: 50px;
+            width: 90px;
+        img
+            width: 20%
+            height: 150px;
+            object-fit: cover;
+            @media screen and (max-width: 2800px) 
+                height: 150px;
+            @media screen and (max-width: 1920px) 
+                height: 75px;
+            @media screen and (max-width: 950px) 
+                height: 50px;
+        div
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            width: 100%;
+
+            h1
+                font-size: 1.75rem;
+                text-align: center;
+                width: 90%;
+                margin: 0 auto;
+
+                @media screen and (max-width: 2800px) 
+                    font-size: 1.75rem;
+                @media screen and (max-width: 1920px) 
+                    font-size: 1rem;
+                @media screen and (max-width: 950px) 
+                    font-size: 0.5rem;
+        
+    h2
+        margin-top: 5px;
+        font-size: 1.25rem;
+        color: white;
+        text-align: center;
+        width: 100%;
