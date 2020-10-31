@@ -23,6 +23,7 @@ class App extends Component {
       nominated: [],
       winners: [],
       open: false,
+      openWinners: false,
       sMovie: {}
   }
   }
@@ -136,7 +137,7 @@ moviesMove = (val) => {
 }
 
 nominatedShow = (val) => {
-  let nom = document.getElementsByClassName('nominated')[0]
+  let nom = document.getElementsByClassName('nomGroup')[0]
   let nomarr = document.getElementsByClassName('nominatedarrow')[0]
   if (this.state.userIDENT === '') {
     this.setState({userIDENT: val})
@@ -234,43 +235,58 @@ movieReload = (val) => {
  }
 
  allNominations = () => {
-  axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/allawards/', {
-    headers: {
-      role: 'admin'
-    }
-   }).then(response => {
-     if (response.data.length >=1) {
-      let arrSet = []
-      let individualWinners = JSON.stringify(response.data)
+  let nom = document.getElementsByClassName('nomWinners')[0]
+  let nomarr = document.getElementsByClassName('nominatedWinnerArrow')[0]
+  if (this.state.openWinners === false) {
+    axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/allawards/', {
+      headers: {
+        role: 'admin'
+      }
+     }).then(response => {
+       if (response.data.length >=1) {
+        let arrSet = []
+        let individualWinners = JSON.stringify(response.data)
+    
+      for (let i = 0; i<response.data.length; i++) {
+        let moviesReg = new RegExp(response.data[i]["imdbID"], 'g')
+        let movieCount = individualWinners.match(moviesReg).length
+        response.data[i]['count'] = movieCount
+        arrSet.push(JSON.stringify({"Title": response.data[i]['Title'], "Year": response.data[i]['Year'], "Poster": response.data[i]['Poster'], "imdbID":response.data[i]['imdbID'],  "count": response.data[i]['count']}))
+      }
   
-    for (let i = 0; i<response.data.length; i++) {
-      let moviesReg = new RegExp(response.data[i]["imdbID"], 'g')
-      let movieCount = individualWinners.match(moviesReg).length
-      response.data[i]['count'] = movieCount
-      arrSet.push(JSON.stringify({"Title": response.data[i]['Title'], "Year": response.data[i]['Year'], "Poster": response.data[i]['Poster'], "imdbID":response.data[i]['imdbID'],  "count": response.data[i]['count']}))
-    }
+      arrSet = [...new Set(arrSet)]
+  
+      let arrSetFinal = arrSet.map(val => JSON.parse(val))
+  
+      this.setState({winners: arrSetFinal.slice(0,5)})
+  
+       }
+  
+       else {
+        this.setState({winners: [{
+          "Title": "Nominated Movies",
+          "Year": "",
+          "imdbID": "empty",
+          "Type": "movie",
+          "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
+        }]});
+  
+       }})
+       .then(response => {
+       })
+      .catch(err => console.log('There is a Quote Error', err))
 
-    arrSet = [...new Set(arrSet)]
+      this.setState({openWinners: true});
+      nom.style.display = 'flex';
+      nomarr.style.transform = 'rotate(90deg)';
+  }
+  
 
-    let arrSetFinal = arrSet.map(val => JSON.parse(val))
-
-    this.setState({winners: arrSetFinal.slice(0,5)})
-
-     }
-
-     else {
-      this.setState({winners: [{
-        "Title": "Nominated Movies",
-        "Year": "",
-        "imdbID": "empty",
-        "Type": "movie",
-        "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-      }]});
-
-     }})
-     .then(response => {
-     })
-    .catch(err => console.log('There is a Quote Error', err))
+  else {
+    this.setState({openWinners: false});
+    nom.style.display = 'none';
+    nomarr.style.transform = 'rotate(-90deg)';
+  }
  }
 
   render() {
