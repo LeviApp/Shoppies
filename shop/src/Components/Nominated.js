@@ -36,16 +36,22 @@ const Nominated = (props) => {
                 <h1 className='modal'>Congratulations! You Finished Nominating 5 Movies.</h1>
                 {log}
             </section>
+            <div className='nomGroup'>
             <div className='nominated'>
-            {props.nominated.map((award) => {
-                 return <NomSingle key={award.imdbID + award.Year} ID={award.imdbID} award={award} deleteNom={props.deleteNom} />
-             })}
-            <button className='winnerButton' onClick={() => props.allNominations()}>Calculate Movie Winners</button>
-            <div className='nomWinners'>
-            {orderMovies.map((winner) => {
-                return <WinnerSingle key={winner.imdbID} ID={winner.imdbID} winner={winner} deleteNom={props.deleteNom} />
-             })}
+                {props.nominated.map((award) => {
+                    return <NomSingle key={award.imdbID + award.Year} ID={award.imdbID} award={award} deleteNom={props.deleteNom} />
+                })}
             </div>
+            <div class='winnerGroup'>
+            <h1 className='winnerButton'>Calculate Movie Winners</h1>
+            <button className='nominatedWinnerArrow' onClick={() => props.allNominations()}>›</button>
+            </div>
+
+                <div className='nomWinners'>
+                {orderMovies.map((winner) => {
+                    return <WinnerSingle key={winner.imdbID} ID={winner.imdbID} winner={winner} deleteNom={props.deleteNom} />
+                })}
+                </div>
             </div>
             </footer>
         );
