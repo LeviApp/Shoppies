@@ -18,10 +18,19 @@ const Nominated = (props) => {
                             }>Log in</h1>
                     </div>
 
+        let nom =   <div className='loggedin nombutton'>
+
+                    </div>
+
         if (isAuthenticated) {
             log =   <div className='logout'>
                         <h2>{user.name} |</h2>
                         <h1 onClick={() => logout()}>Log out</h1>
+                    </div>
+            
+            nom =  <div className='loggedin nombutton'>
+                        <h1>Nominated</h1>
+                        <button className='nominatedarrow' onClick={() => props.nominatedShow(user.sub.substring(6))}>›</button>
                     </div>
         }
 
@@ -29,10 +38,7 @@ const Nominated = (props) => {
           return (
             <footer className="nominatedContainer">
             <section>
-                <div className='loggedin nombutton'>
-                    <h1>Nominated</h1>
-                    <button className='nominatedarrow' onClick={() => props.nominatedShow(user.sub.substring(6))}>›</button>
-                </div>
+                {nom}
                 <h1 className='modal'>Congratulations! You Finished Nominating 5 Movies.</h1>
                 {log}
             </section>
