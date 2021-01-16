@@ -202,7 +202,6 @@ deleteNom = (id, mos) => {
 }
 
 movieReload = (val) => {
-  console.log(val, 'this is the value')
   let congrats = document.getElementsByClassName('modal')[0]
   axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
     headers: {
@@ -231,7 +230,7 @@ movieReload = (val) => {
         congrats.style.visibility = 'hidden'
 
       }
-     }).catch(err => console.log('There is a Quote Error', err))
+     }).catch(err => console.log('There is a Movie Error', err))
  }
 
  allNominations = () => {
@@ -274,7 +273,7 @@ movieReload = (val) => {
        }})
        .then(response => {
        })
-      .catch(err => console.log('There is a Quote Error', err))
+      .catch(err => console.log('There is a Movie Error', err))
 
       this.setState({openWinners: true});
       nom.style.display = 'flex';
