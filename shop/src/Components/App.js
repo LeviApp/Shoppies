@@ -34,39 +34,11 @@ class App extends Component {
   componentDidMount() {
     const { user } = this.props.auth0;
     this.movieReload(this.state.userIDENT)
-    // let val = localStorage.getItem('nominatedMovies')
-    // let congrats = document.getElementsByClassName('modal')[0]
-    // if (val === null) {
-    //   this.setState({nominated: [{
-    //     "Title": "Nominated Movies",
-    //     "Year": "",
-    //     "imdbID": "empty",
-    //     "Type": "movie",
-    //     "Poster": "https://www.kindpng.com/picc/m/381-3813740_film-award-trophy-png-transparent-png.png"
-    //   }]})
-    // }
-    // else {
-    //   this.state.nominated = JSON.parse(val)
-
-    //   if (JSON.parse(val).length === 5) {
-    //     congrats.style.visibility = 'visible'
-    //   }
-    // }
   }
 
   componentWillUnmount() {
 
   }
-
-  // componentDidUpdate(newProps, newState) {
-  //   console.log('this did update', newProps, newState['nominated'].length, this.state.nominated.length)
-  // }
-
-  // componentWillUpdate(prevProps, prevState) {
-  //   // console.log('this will update', prevProps, prevState['nominated'].length, this.state.nominated.length)
-  // }
-
-
   inputHandler = (event) => {
 
     let value=event.target.value;
@@ -167,23 +139,6 @@ axios.post('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', savedM
   .catch(function (error) {
     console.log(error);
   });
- 
-
-// if (this.state.nominated[0].imdbID === "empty") {
-//   this.setState({nominated: [movie]});
-//   window.localStorage.setItem('nominatedMovies', JSON.stringify([movie]));
-
-// }
-
-// else {
-//   let congrats = document.getElementsByClassName('modal')[0]
-
-//   this.setState({nominated: [...this.state.nominated, movie]});
-//   window.localStorage.setItem('nominatedMovies', JSON.stringify([...this.state.nominated, movie]));
-//   if ([...this.state.nominated, movie].length === 5) {
-//       congrats.style.visibility = 'visible'
-//   }
-// }
 }
 
 
