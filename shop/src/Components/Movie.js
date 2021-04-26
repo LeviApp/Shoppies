@@ -16,7 +16,6 @@ const Movie = (props) => {
 
         if (props.nominated.filter(nom => nom['imdbID'] === props.ID).length === 1) {
             nominateButton = <button className='nomMovie' onClick={() => props.deleteNom(props.ID, props.nominated)}></button>
-
         }
         else if (props.nominated.length === 5) {
             nominateButton = <button disabled={true} className='nomEnough'>Limit Reached</button>
