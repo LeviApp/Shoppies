@@ -93,7 +93,7 @@ class App extends Component {
   componentDidMount() {
     this._isM = true;
     setTimeout(()=> {
-      axios.get('https://quotes-4-life.herokuapp.com/home')
+      axios.get('https://shopifyshoppies.onrender.com/home')
       .then(response => {this.setState({quotes: response.data});
       console.log(`App.js ComponentDidMount`, response)})
       .catch(err => console.log('There is a Quote Error'))
