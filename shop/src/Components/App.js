@@ -131,7 +131,7 @@ nominatedShow = (val) => {
 nominatedMovie = (movie, val) => {
   let savedMovie = movie;
   savedMovie['userID'] = val
-axios.post('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', savedMovie, {headers: {
+axios.post('https://shopifyshoppies.onrender.com/shoppies/api/awards/', savedMovie, {headers: {
     userID: val}})
   .then(function (response) {
   })
@@ -149,7 +149,7 @@ deleteNom = (id, mos) => {
     let mosOne = mos.filter(mo => mo.imdbID === id)
     vidID = mosOne[0].id;
   }
-  axios.delete(`https://shopify-shoppies.herokuapp.com/shoppies/api/awards/${vidID}`)
+  axios.delete(`https://shopifyshoppies.onrender.com/shoppies/api/awards/${vidID}`)
   .then(response => {
      this.movieReload(this.state.userIDENT)
   })
@@ -158,7 +158,7 @@ deleteNom = (id, mos) => {
 
 movieReload = (val) => {
   let congrats = document.getElementsByClassName('modal')[0]
-  axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/awards/', {
+  axios.get('https://shopifyshoppies.onrender.com/shoppies/api/awards/', {
     headers: {
       userID: val
     }
@@ -192,7 +192,7 @@ movieReload = (val) => {
   let nom = document.getElementsByClassName('nomWinners')[0]
   let nomarr = document.getElementsByClassName('nominatedWinnerArrow')[0]
   if (this.state.openWinners === false) {
-    axios.get('https://shopify-shoppies.herokuapp.com/shoppies/api/allawards/', {
+    axios.get('https://shopifyshoppies.onrender.com/shoppies/api/allawards/', {
       headers: {
         role: 'admin'
       }
